@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "setwd(\"/Users/semenleyn/Downloads/Temp\")\ntbl = read.table(\"1.txt\", sep = '\\t', header = F)\nlibrary(ggplot2)\ntbl$V4 = factor(tbl$V4, levels = c(\"Glu58\", \"Leu62\", \"Glu249\", \"Trp271\", \"Ile317\", \"Lys320\", \"Arg322\", \"Ile323\", \"Ser324\"))\n\nggplot(tbl, aes(V2, fill = V4)) +\n  geom_histogram(bins = 1000) +\n  facet_grid(V3 ~ .) +\n  scale_x_continuous(limits = c(0,366)) +\n  theme_bw() +\n  theme(axis.title.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank()) +\n  scale_fill_discrete(name = \"\")\n",
+    "created" : 1541532704123.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2136112031",
+    "id" : "AF7F97CB",
+    "lastKnownWriteTime" : 4323548480,
+    "last_content_update" : 1541534365071,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

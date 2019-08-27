@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#start in the MoRbido directory\nsetwd(\"/Users/semenleyn/Documents/WORK/Genomics/Tasks/Task20 (Experimental Evolution)/Protocols/MoRbido\")\n\nlibrary(roxygen2)\nlibrary(devtools)\ndocument()\nsetwd(\"..\")\ninstall(\"MoRbido\")\n",
+    "created" : 1541020292033.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3471585047",
+    "id" : "91C1FB8F",
+    "lastKnownWriteTime" : 1540929108,
+    "last_content_update" : 1540929108,
+    "path" : "~/Documents/WORK/Genomics/Tasks/Task20 (Experimental Evolution)/Protocols/install_Morbido.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
