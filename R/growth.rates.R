@@ -15,9 +15,10 @@ growth.rates <- function(tables, V = 20, MIC = 0.016){
     #tV$time <- tV$time/3600 #convert to hours
     tC <- tables[i][[1]][2]$Conc
     tC$Concentration <- tC$Concentration / MIC   #Concentration will be in the xMIC
+    tC$Bottle <- tC$Bottle / MIC
     tube <- names(tables)[i]
     
-    tG <- data.frame(time = c(), growth.rate = c(), Concentration = c(), t.start = c(), t.stop = c()) #Growth rates will be calculated for the middle of the interval
+    tG <- data.frame(time = c(), growth.rate = c(), Concentration = c(), t.start = c(), t.stop = c(), BConc = c()) #Growth rates will be calculated for the middle of the interval
     
     for( j in 1:(length(tC$time)-1) ){
       tV.temp <- tV[tV$time >= tC$time[j] & tV$time < tC$time[j+1],]  #take interval betwee dilutions
@@ -26,12 +27,14 @@ growth.rates <- function(tables, V = 20, MIC = 0.016){
         next
       }
       
+      BConc <- tC$Bottle[j]
+      
       fit <- lm(value ~ time, data = tV.temp)
       Conc.temp <- tC$Concentration[j]
       if( fit$coefficients[2] >= 0 ){
-        tG <- rbind(tG, data.frame( time = ( (tV.temp$time[1] + tail(tV.temp$time,1))/7200 ), growth.rate = fit$coefficients[2] * 3600, Concentration = Conc.temp, t.start = tV.temp$time[1]/3600, t.stop = tail(tV.temp$time,1)/3600))
+        tG <- rbind(tG, data.frame( time = ( (tV.temp$time[1] + tail(tV.temp$time,1))/7200 ), growth.rate = fit$coefficients[2] * 3600, Concentration = Conc.temp, t.start = tV.temp$time[1]/3600, t.stop = tail(tV.temp$time,1)/3600, BConc = BConc))
       }else{
-        tG <- rbind(tG, data.frame( time = ( (tV.temp$time[1] + tail(tV.temp$time,1))/7200 ), growth.rate = 0, Concentration = Conc.temp, t.start = tV.temp$time[1]/3600, t.stop = tail(tV.temp$time,1)/3600))
+        tG <- rbind(tG, data.frame( time = ( (tV.temp$time[1] + tail(tV.temp$time,1))/7200 ), growth.rate = 0, Concentration = Conc.temp, t.start = tV.temp$time[1]/3600, t.stop = tail(tV.temp$time,1)/3600, BConc = BConc))
       }
     }
     

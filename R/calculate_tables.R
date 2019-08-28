@@ -84,8 +84,8 @@ calculate_tables <- function(dil_check = T, bc_check = T, C0 = 0, CS1 = 0, CS2 =
     Cn <- C0
     CS11 <- CS1
     CS21 <- CS2
-    tC <- data.frame(c(),c(),colnames(c("time","Concentration")))
-    ttemp <- data.frame(time = 0,Concentration = Cn)       #zero time point for concentration
+    tC <- data.frame(c(),c(),c(),colnames(c("time","Concentration","Bottle")))
+    ttemp <- data.frame(time = 0,Concentration = Cn, Bottle = CS21)       #zero time point for concentration
     tC <- rbind(tC,ttemp)
     tV <- table.t[table.t$tube == tube,]
     
@@ -105,8 +105,8 @@ calculate_tables <- function(dil_check = T, bc_check = T, C0 = 0, CS1 = 0, CS2 =
         if(length(d$time) >= dc){             #introduce dilutions
           if(tp$time[j] >= d$time[dc]){
             Cn <- Cn * (1 - d$dilution[dc]) + d$conc[dc] * d$dilution[dc]
-            ttemp <- data.frame(as.integer((tp$time[j-1]+tp$time[j])/2),Cn)
-            colnames(ttemp) <- c("time","Concentration")
+            ttemp <- data.frame(as.integer((tp$time[j-1]+tp$time[j])/2),Cn,CS21)
+            colnames(ttemp) <- c("time","Concentration","Bottle")
             tC <- rbind(tC,ttemp)
             dc <- dc + 1
           }
@@ -134,7 +134,7 @@ calculate_tables <- function(dil_check = T, bc_check = T, C0 = 0, CS1 = 0, CS2 =
         }else{
           Cn <- (Cn*(V - dV)+CS21*dV)/V
         }
-        tC <- rbind(tC,data.frame(time = tp$time[j], Concentration = Cn))
+        tC <- rbind(tC,data.frame(time = tp$time[j], Concentration = Cn, Bottle = CS21))
       }
     }else if(dil_check == T && bc_check == F){  #Only dilutions wer present
       for(j in 1:dim(d)[1]){          #clear jumps at dilution times
@@ -145,8 +145,8 @@ calculate_tables <- function(dil_check = T, bc_check = T, C0 = 0, CS1 = 0, CS2 =
         if(length(d$time) >= dc){             #introduce dilutions
           if(tp$time[j] >= d$time[dc]){
             Cn <- Cn * (1 - d$dilution[dc]) + d$conc[dc] * d$dilution[dc]       #dilution is (V-dV)/V
-            ttemp <- data.frame(tp$time[j-1]+1,Cn)
-            colnames(ttemp) <- c("time","Concentration")
+            ttemp <- data.frame(tp$time[j-1]+1,Cn, CS21)
+            colnames(ttemp) <- c("time","Concentration","Bottle")
             tC <- rbind(tC,ttemp)
             dc <- dc + 1
           }
@@ -166,7 +166,7 @@ calculate_tables <- function(dil_check = T, bc_check = T, C0 = 0, CS1 = 0, CS2 =
         }else{
           Cn <- (Cn*(V - dV)+CS21*dV)/V
         }
-        tC <- rbind(tC,data.frame(time=c(tp$time[j]),Concentration=c(Cn)))
+        tC <- rbind(tC,data.frame(time=c(tp$time[j]),Concentration=c(Cn),Bottle=CS21))
       }
     }else if(dil_check == F && bc_check == T){    #Only bottle changes were present
       for(j in 1:dim(tp)[1]){ 
@@ -192,7 +192,7 @@ calculate_tables <- function(dil_check = T, bc_check = T, C0 = 0, CS1 = 0, CS2 =
         }else{
           Cn <- (Cn*(V - dV)+CS21*dV)/V
         }
-        tC <- rbind(tC,data.frame(time=c(tp$time[j]),Concentration=c(Cn)))
+        tC <- rbind(tC,data.frame(time=c(tp$time[j]),Concentration=c(Cn),Bottle=CS21))
       }
     }else{
       for(j in 1:dim(tp)[1]){
@@ -211,7 +211,7 @@ calculate_tables <- function(dil_check = T, bc_check = T, C0 = 0, CS1 = 0, CS2 =
         }else{
           Cn <- (Cn*(V - dV)+CS21*dV)/V
         }
-        tC <- rbind(tC,data.frame(time=c(tp$time[j]),Concentration=c(Cn)))
+        tC <- rbind(tC,data.frame(time=c(tp$time[j]),Concentration=c(Cn),Bottle=CS21))
       }
     }
     
