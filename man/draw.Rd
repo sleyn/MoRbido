@@ -4,9 +4,23 @@
 \alias{draw}
 \title{Draw OD/time and Concentration/time curves.}
 \usage{
-draw(tables, c.units = "uM", MIC = 0.016, log2 = T, p.size = 0.5,
-  add.model = F, model.table = data.frame(), m.prob = "",
-  params = list(), dist = 2, ymeta = 0.3)
+draw(
+  tables,
+  c.units = "uM",
+  MIC = 0.016,
+  log2 = T,
+  p.size = 0.5,
+  add.model = F,
+  model.table = data.frame(),
+  m.prob = "",
+  params = list(),
+  dist = 2,
+  ymeta = 0.3,
+  sample_color = "red",
+  bottle_color = "blue",
+  repel = F,
+  legend = T
+)
 }
 \arguments{
 \item{tables}{- List of tables that were created by \emph{calaculate_tables} function.}
@@ -30,6 +44,14 @@ draw(tables, c.units = "uM", MIC = 0.016, log2 = T, p.size = 0.5,
 \item{dist}{- distance between lines indicated sample collections or bottle changes and text}
 
 \item{ymeta}{- height of bottle change and sample collection lables}
+
+\item{sample_color}{- color for lines indicating sampling (default: 'red')}
+
+\item{bottle_color}{- color for lines indicating bottle change (default: 'blue')}
+
+\item{repel}{- use repel labels instead of line labels (default: FALSE)}
+
+\item{legend}{- show legend (deafult: TRUE)}
 }
 \description{
 Draw OD/time and Concentration/time curves.

@@ -4,9 +4,15 @@
 \alias{get_draw_parameters}
 \title{Create a list of auxillary parameters for draw function}
 \usage{
-get_draw_parameters(dil_check = T, bc_check = T, CS1 = 0, CS2 = 10,
-  od_file = "6-21-17-OD.txt", dil_file = "dilutions.txt",
-  bc_file = "bottle_change.txt")
+get_draw_parameters(
+  dil_check = T,
+  bc_check = T,
+  CS1 = 0,
+  CS2 = 10,
+  od_file = "6-21-17-OD.txt",
+  dil_file = "dilutions.txt",
+  bc_file = "bottle_change.txt"
+)
 }
 \arguments{
 \item{dil_check}{- Were any manual dilutions introdused? Default is TRUE. If TRUE - need to provide dil_file}

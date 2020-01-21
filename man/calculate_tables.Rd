@@ -4,12 +4,22 @@
 \alias{calculate_tables}
 \title{Create a list tables of OD and Concentration changes through time from the log files.}
 \usage{
-calculate_tables(dil_check = T, bc_check = T, C0 = 0, CS1 = 0,
-  CS2 = 10, V = 20, dV = 4, od_file = "6-21-17-OD.txt",
-  pump_file = "6-21-17-pumps.txt", dil_file = "dilutions.txt",
-  bc_file = "bottle_change.txt", tubes_selected = 1:6, zero = c(Tube1
-  = 0, Tube2 = 0, Tube3 = 0, Tube4 = 0, Tube5 = 0, Tube6 = 0),
-  dV.change = c())
+calculate_tables(
+  dil_check = T,
+  bc_check = T,
+  C0 = 0,
+  CS1 = 0,
+  CS2 = 10,
+  V = 20,
+  dV = 4,
+  od_file = "6-21-17-OD.txt",
+  pump_file = "6-21-17-pumps.txt",
+  dil_file = "dilutions.txt",
+  bc_file = "bottle_change.txt",
+  tubes_selected = 1:6,
+  zero = c(Tube1 = 0, Tube2 = 0, Tube3 = 0, Tube4 = 0, Tube5 = 0, Tube6 = 0),
+  dV.change = c()
+)
 }
 \arguments{
 \item{dil_check}{- Were any manual dilutions introdused? Default is TRUE. If TRUE - need to provide dil_file}
