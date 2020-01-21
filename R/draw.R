@@ -67,7 +67,7 @@ draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, add.mode
     tplotV <- ggplot(tV,aes(time, value)) +
       geom_line() +
       geom_point(aes(color = pump), size=p.size) +
-      ggtitle(paste0("OD ",tube,"\n")) +
+      ggtitle(paste0("OD Reactor ", substring(tube, 5),"\n")) +
       xlim(min(tV$time,tC$time)-4,max(tV$time,tC$time)) +
       labs(y = "OD",x = "Time, h") +
       theme(axis.title.x = element_text(size=9),axis.title.y = element_text(size=9), plot.title = element_text(face="bold")) +
