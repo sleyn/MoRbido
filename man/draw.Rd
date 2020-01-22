@@ -19,7 +19,8 @@ draw(
   sample_color = "red",
   bottle_color = "blue",
   repel = F,
-  legend = T
+  legend = T,
+  m1 = T
 )
 }
 \arguments{
@@ -52,6 +53,8 @@ draw(
 \item{repel}{- use repel labels instead of line labels (default: FALSE)}
 
 \item{legend}{- show legend (deafult: TRUE)}
+
+\item{m1}{- if TRUE plot concentration in media 1 (default: TRUE)}
 }
 \description{
 Draw OD/time and Concentration/time curves.
