@@ -105,7 +105,7 @@ draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, add.mode
               direction = 'x',
               aes(label = label),
               alpha = 0.8,
-              size = 2
+              size = 4
               )
         }
         tplotC <- tplotC +
@@ -137,7 +137,7 @@ draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, add.mode
       	        direction = 'x',
       	        aes(label = label),
       	        alpha = 0.8,
-      	        size = 2
+      	        size = 4
       	        )
       	  }
       	  tplotC <- tplotC +
