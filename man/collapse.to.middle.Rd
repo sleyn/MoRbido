@@ -4,7 +4,7 @@
 \alias{collapse.to.middle}
 \title{Make tables with measurement only in the middle of interval.}
 \usage{
-collapse.to.middle(tables)
+\method{collapse}{to.middle}(tables)
 }
 \arguments{
 \item{tables}{- List of tables that were created by \emph{calaculate_tables} function.}

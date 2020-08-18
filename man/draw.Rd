@@ -20,7 +20,8 @@ draw(
   bottle_color = "blue",
   repel = F,
   legend = T,
-  m1 = T
+  m1 = T,
+  vline = T
 )
 }
 \arguments{
@@ -55,6 +56,8 @@ draw(
 \item{legend}{- show legend (deafult: TRUE)}
 
 \item{m1}{- if TRUE plot concentration in media 1 (default: TRUE)}
+
+\item{vline}{- Plot vertical lines indicating sampling and changes of bottle}
 }
 \description{
 Draw OD/time and Concentration/time curves.

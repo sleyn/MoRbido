@@ -15,6 +15,7 @@
 #' @param repel - use repel labels instead of line labels (default: FALSE)
 #' @param legend - show legend (deafult: TRUE)
 #' @param m1 - if TRUE plot concentration in media 1 (default: TRUE)
+#' @param vline - Plot vertical lines indicating sampling and changes of bottle
 
 #' @export
 
@@ -23,7 +24,10 @@
 #' @import grid
 #' @import ggrepel
 
-draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, add.model = F, model.table = data.frame(), m.prob = "", params = list(), dist = 2, ymeta = 0.3, sample_color = 'red', bottle_color = 'blue', repel = F, legend = T, m1 = T){
+draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, 
+    add.model = F, model.table = data.frame(), m.prob = "", params = list(), 
+    dist = 2, ymeta = 0.3, sample_color = 'red', bottle_color = 'blue', 
+    repel = F, legend = T, m1 = T, vline = T){
   #if log2==T, then concentration is shown as log2 of xMIC. Else - in linear coordinates in c.units
   #tables - list of lists with tables of concentration and OD
   #p.size - size of points on the OD plot
@@ -86,8 +90,10 @@ draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, add.mode
     if( length(params) != 0 ){
       # Plot botttle changes
       for( b in 1:dim(params[['bcs']])[1] ){
-        tplotV <- tplotV +
-          geom_vline(xintercept = params[['bcs']]$time[b], colour = bottle_color)
+        if(vline == TRUE){
+          tplotV <- tplotV +
+            geom_vline(xintercept = params[['bcs']]$time[b], colour = bottle_color)
+        }
         if( m1 == TRUE ){
           conc_anno = paste0("M1 = ", round(params[['bcs']]$Cp1[b]/MIC, 0), "x, M2 = ", round(params[['bcs']]$Cp2[b]/MIC, 0), "x")
         }else{
@@ -107,7 +113,7 @@ draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, add.mode
             geom_label_repel(data = sample_point,
               color = bottle_color,
               hjust = 0,
-              nudge_x = 1,
+              nudge_x = 0,
               nudge_y = 1,
               direction = 'x',
               aes(label = label),
@@ -115,8 +121,10 @@ draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, add.mode
               size = 4
               )
         }
-        tplotC <- tplotC +
-          geom_vline(xintercept = params[['bcs']]$time[b], colour = bottle_color)
+        if(vline == TRUE){
+          tplotC <- tplotC +
+            geom_vline(xintercept = params[['bcs']]$time[b], colour = bottle_color)
+        }
       }
 
       temp_dils =  params[['dils']][params[['dils']]$tube == tube,]
@@ -124,8 +132,11 @@ draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, add.mode
       # Plot sampling
       if(length(temp_dils) > 0){
       	for( d in 1:dim(temp_dils)[1] ){
-      	  tplotV <- tplotV +
-      	    geom_vline(xintercept = temp_dils$time[d], colour = sample_color)
+      	  # Sampling vertical lines
+      	  if(vline == TRUE){
+      	    tplotV <- tplotV +
+      	      geom_vline(xintercept = temp_dils$time[d], colour = sample_color)
+      	  }
       	  if(repel == FALSE){
       	    tplotV <- tplotV +
       	      annotate("text", x=temp_dils$time[d] + dist, label=paste0("Sample \n ", round(temp_dils$time[d], 0), "hrs"), y=ymeta, colour=sample_color, angle=90, size=4)
@@ -139,16 +150,19 @@ draw <- function(tables, c.units="uM", MIC=0.016, log2=T, p.size = 0.5, add.mode
       	      geom_label_repel(data = sample_point,
       	        color = sample_color,
       	        hjust = 0,
-      	        nudge_x = 1,
-      	        nudge_y = 0.1,
+      	        nudge_x = 0,
+      	        nudge_y = 1,
       	        direction = 'x',
       	        aes(label = label),
       	        alpha = 0.8,
-      	        size = 4
+      	        size = 4,
+      	        arrow = arrow(length = unit(0.03, "npc"), type = "closed", ends = "last")
       	        )
       	  }
-      	  tplotC <- tplotC +
-      	    geom_vline(xintercept = temp_dils$time[d], colour = sample_color)
+      	  if(vline == TRUE){
+      	    tplotC <- tplotC +
+      	      geom_vline(xintercept = temp_dils$time[d], colour = sample_color)
+      	  }
       	}
       }
 
